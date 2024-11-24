@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -25,11 +25,15 @@ SECRET_KEY = 'django-insecure-x8e3ut51u%=ko$o@a*tfkonwdz!xp!jsb@(588ycvb&fu$^5=w
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-COMPRESS_ROOT = BASE_DIR / 'static'
+
 
 COMPRESS_ENABLED = True
 
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',  # Default finder
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',  # Default finder
+    'compressor.finders.CompressorFinder',  # Compressor finder
+]
 ALLOWED_HOSTS = []
 
 
@@ -123,10 +127,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(CORE_DIR, 'apps/static'),
+)
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#############################################################
+#############################################################

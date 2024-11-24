@@ -1,18 +1,20 @@
-{% load compress %}
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-    {% compress css %}
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Project</title>
+    <!-- Import main.css -->
     <link rel="stylesheet" href="{% static 'src/css/main.css' %}">
-    {% endcompress %}
 </head>
-<body class="bg-green-50">
-    <div class="container mx-auto mt-4">
-        {% block content %}
-        {% endblock content %}
-    </div>
+<body>
+    <h1>Welcome to Django</h1>
+    <!-- Import Axios from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Import index.js -->
+
+
+    <script src="{% static 'dist/bundle.js' %}"></script>
 </body>
 </html>
